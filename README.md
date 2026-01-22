@@ -10,5 +10,5 @@ I am using this repo to practise Terraform (IaC)
 ## 📘 Learning Modules
 
 ### IAM Custom role creation 
-- [IAM role](IAM_role/IAM-role)
+- [IAM role](IAM-role)
 
