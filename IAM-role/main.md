@@ -1,5 +1,6 @@
 ## Settings block 
 
+```bash
 terraform {
     #terraform version    required_providers {
          google = {
@@ -8,11 +9,14 @@ terraform {
     }
     }
 }
+```
 
 ## Provider block 
 # Google Provider
 
+```bash
 provider "google" {
   project = "var.project_id"
   region  = "var.region"
 }
+```
