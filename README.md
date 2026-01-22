@@ -11,4 +11,6 @@ I am using this repo to practise Terraform (IaC)
 
 ### IAM Custom role creation 
 - [IAM role](IAM-role)
-
+  
+### VPC
+- [VPC](VPC)
