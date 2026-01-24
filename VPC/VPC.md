@@ -18,8 +18,6 @@ resource "google_compute_subnetwork" "subnet" {
     region = var.region
     ip_cidr_range = each.value.cidr_range
     network = google_compute_network.vpc[each.key].self_link
-
-    depends_on = [ google_compute_network.vpc]
 }
 ```
 
@@ -42,8 +40,6 @@ resource "google_compute_firewall" "allow_ssh" {
         protocol = "tcp"
         ports = ["22"]
     }
-
-    depends_on = [google_compute_network.vpc]
 }
 ```
 
@@ -62,7 +58,6 @@ resource "google_compute_firewall" "allow_icmp" {
     allow {
         protocol = "icmp"
     }
-    depends_on = [google_compute_network.vpc]
 }
 ```
 
@@ -88,8 +83,6 @@ resource "google_compute_instance" "vm" {
     }
 
     tags = ["allow-ssh", "allow-icmp"]
-
-    depends_on = [ google_compute_subnetwork.subnet ]
 }
 ```
 
@@ -108,20 +101,8 @@ resource "google_compute_network_peering" "vpc2_to_vpc1" {
     name = "vpc2-to-vpc1"
     network = google_compute_network.vpc["vpc2"].self_link
     peer_network = google_compute_network.vpc["vpc1"].self_link
-
-    depends_on = [ google_compute_instance.vm ]
 }
 ```
 
 
-resource "google_compute_network_peering" "vpc_peering" {
-  for_each = {
-   for pair in local.vpc_peering_pairs :
-    "${pair.from}-to-${pair.to}" => pair
-   }
-
- name         = each.key
- network      = google_compute_network.vpc[each.value.from].self_link
- peer_network = google_compute_network.vpc[each.value.to].self_link
-}
 
