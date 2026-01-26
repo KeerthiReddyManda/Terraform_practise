@@ -14,3 +14,6 @@ I am using this repo to practise Terraform (IaC)
   
 ### VPC
 - [VPC](VPC)
+
+### VM with startup script
+- [VM with startup](VM-with-startup-script)
